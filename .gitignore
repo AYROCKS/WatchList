@@ -1,0 +1,35 @@
+# Android Studio/IntelliJ IDEA
+*.iml
+.gradle
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+
+# macOS
+.DS_Store
+
+# Build directories
+/build
+/captures
+.externalNativeBuild
+.cxx
+
+# Local and environment files
+/local.properties
+local.properties
+
+# Gradle wrapper
+gradle-wrapper.jar
+gradle-wrapper.properties
+
+# Android Studio Project files
+/.idea/*.iml
+/.idea/.name
+
+# Gradle settings
+.gradle/
+
+app/src/main/java/com/aystudio/watchlist/utils/Constants.kt
