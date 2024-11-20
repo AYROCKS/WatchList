@@ -9,16 +9,17 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun SearchBarComponent(query: String, onQueryChange: (String) -> Unit, onClear: () -> Unit) {
+fun SearchBarComponent(modifier: Modifier = Modifier,query: String, onQueryChange: (String) -> Unit, onClear: () -> Unit) {
 
 
     OutlinedTextField(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(8.dp),
 
@@ -34,7 +35,8 @@ fun SearchBarComponent(query: String, onQueryChange: (String) -> Unit, onClear: 
                     Icon(imageVector = Icons.Default.Clear, contentDescription = null)
                 }
         },
-        singleLine = true
+        singleLine = true,
+        placeholder = { Text(text = "Search Something...")}
 
 
     )

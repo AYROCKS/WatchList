@@ -5,8 +5,10 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.aystudio.watchlist.domain.repository.Repository
+import com.aystudio.watchlist.presentation.models.CastModelClass
 import com.aystudio.watchlist.presentation.models.GenreResponse
 import com.aystudio.watchlist.presentation.models.Result
+import com.aystudio.watchlist.presentation.models.VideoModelClass
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -54,7 +56,8 @@ class MoviesViewModel @Inject constructor(private val repository: Repository) : 
 
 
     private val _searchQuery = MutableStateFlow("")
-    val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()
+    val searchQuery= _searchQuery.asStateFlow()
+
 
     @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
     val searchResult: Flow<PagingData<Result>> = searchQuery
@@ -84,5 +87,29 @@ class MoviesViewModel @Inject constructor(private val repository: Repository) : 
             }
         }
     }
+
+    private val _movieVideo = MutableStateFlow(VideoModelClass(emptyList()))
+    val movieVideo = _movieVideo.asStateFlow()
+
+    fun getMovieVideo(id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.getMovieVideo(id).collect {
+                _movieVideo.value = it
+            }
+        }
+    }
+
+
+    private val _movieCast = MutableStateFlow(CastModelClass(emptyList()))
+    val movieCast = _movieCast.asStateFlow()
+
+    fun getMovieCast(id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.getMovieCast(id).collect {
+                _movieCast.value = it
+            }
+        }
+    }
+
 
 }

@@ -17,4 +17,12 @@ class DatabaseRepositoryImp @Inject constructor(private val moviesDao: Dao) : Da
         return moviesDao.getMoviesRoomList()
     }
 
+    override suspend fun isMovieDao(id: Int): Boolean {
+        return moviesDao.isMovieExists(id)
+    }
+
+    override suspend fun deleteMovie(databaseModelClass: DatabaseModelClass) {
+        return moviesDao.deleteMovie(databaseModelClass)
+    }
+
 }

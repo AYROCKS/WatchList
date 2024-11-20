@@ -20,11 +20,9 @@ fun SearchScreen(modifier: Modifier, navController: NavController) {
     val viewModel: MoviesViewModel = hiltViewModel()
 
 
-
     val searchQuery by viewModel.searchQuery.collectAsStateWithLifecycle()
 
     val searchResult = viewModel.searchResult.collectAsLazyPagingItems()
-
 
 
     Column(modifier = modifier) {
@@ -35,7 +33,11 @@ fun SearchScreen(modifier: Modifier, navController: NavController) {
             })
 
 
-        CardStateComponent(category = searchResult, navController = navController, isSearchScreen = true)
+        CardStateComponent(
+            category = searchResult,
+            navController = navController,
+            isSearchScreen = true
+        )
 
     }
 

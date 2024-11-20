@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -8,12 +11,18 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     id("androidx.room")
 
+
 }
+
 
 android {
     namespace = "com.aystudio.watchlist"
     compileSdk = 34
 
+    buildFeatures {
+        buildConfig = true
+    }
+    
     defaultConfig {
         applicationId = "com.aystudio.watchlist"
         minSdk = 27
@@ -26,6 +35,11 @@ android {
             useSupportLibrary = true
         }
 
+
+        val properties = Properties()
+        properties.load(FileInputStream(File(rootProject.rootDir, "local.properties")))
+
+        buildConfigField("String", "API_KEY", properties.getProperty("API_KEY"))
 
     }
 
@@ -101,6 +115,8 @@ dependencies {
     implementation("androidx.room:room-runtime:2.6.1")
     annotationProcessor("androidx.room:room-compiler:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
+
+    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:chromecast-sender:0.30")
 
     kapt("androidx.room:room-compiler:2.6.1")
 

@@ -13,7 +13,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MoviesDatabaseViewModel @Inject constructor(val repository: DatabaseRepository) : ViewModel(){
+class MoviesDatabaseViewModel @Inject constructor(val repository: DatabaseRepository) :
+    ViewModel() {
 
 
     private val _movies = MutableStateFlow<List<DatabaseModelClass>>(emptyList())
@@ -24,18 +25,42 @@ class MoviesDatabaseViewModel @Inject constructor(val repository: DatabaseReposi
         fetchMovies()
     }
 
-    fun insertMovie(model: DatabaseModelClass){
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.insertMovie(model)
-        }
-    }
 
-    private fun fetchMovies(){
+    private fun fetchMovies() {
         viewModelScope.launch(Dispatchers.IO) {
             repository.getMovies().collectLatest {
                 _movies.value = it
             }
         }
+    }
+
+    private val _isBookmarked = MutableStateFlow(false)
+    val isBookmarked = _isBookmarked.asStateFlow()
+
+    fun checkIfBookmarked(id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = repository.isMovieDao(id)
+            _isBookmarked.value = response
+        }
+    }
+
+    fun toggleBookmark(model: DatabaseModelClass) {
+        viewModelScope.launch(Dispatchers.IO) {
+            if (_isBookmarked.value) {
+                repository.deleteMovie(model)
+                _isBookmarked.value = false
+            } else {
+                repository.insertMovie(model)
+                _isBookmarked.value = true
+            }
+        }
+    }
+
+    private val _searchQuery = MutableStateFlow("")
+    val searchQuery = _searchQuery.asStateFlow()
+
+    fun onQueryChanged(query: String){
+        _searchQuery.value = query
     }
 
 

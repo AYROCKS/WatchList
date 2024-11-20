@@ -32,4 +32,3 @@ gradle-wrapper.properties
 # Gradle settings
 .gradle/
 
-app/src/main/java/com/aystudio/watchlist/utils/Constants.kt
