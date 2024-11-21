@@ -18,23 +18,19 @@ fun greedySortByVoteAverage(list: MutableList<DatabaseModelClass>, maxWeight: Do
             currentWeight -= itemWeight
             totalValue += itemValue
             selectedItems.add(item)
-            println("Added object ${item.title} (Vote Average: $itemValue) completely in the bag. Space left: $currentWeight")
         } else if (currentWeight > 0) {
 
             val fraction = currentWeight / itemWeight
             totalValue += itemValue * fraction
             selectedItems.add(item)
-            println("Added ${(fraction * 100).toInt()}% of object ${item.title} (Vote Average: $itemValue) in the bag.")
-            break // Since we're done after taking the fraction of the last item
+            break
         }
 
-        // If the knapsack is full, stop the process
         if (currentWeight == 0.0) {
             break
         }
     }
 
-    // Print the final value of the selected items
-    println("Filled the bag with objects worth $totalValue.")
+
     return selectedItems
 }

@@ -24,31 +24,32 @@ fun CardDisplayDatabaseComponent(
     action: String = ""
 ) {
 
-       val dsaList = when (action) {
-            "BinarySearch" -> {
-                val sortedList = list.sortedBy { it.title }
-                val index = if (query.isNotBlank()) binarySearch(sortedList, query, 0, sortedList.size - 1)
+    val dsaList = when (action) {
+        "BinarySearch" -> {
+            val sortedList = list.sortedBy { it.title }
+            val index =
+                if (query.isNotBlank()) binarySearch(sortedList, query, 0, sortedList.size - 1)
                 else -1
 
-                if (index != -1) listOf(sortedList[index]) else sortedList
-            }
-
-            "QuickSort" -> {
-                val sortedList = list.toMutableStateList()
-                quickSort(sortedList, 0, sortedList.size - 1)
-                sortedList
-            }
-
-           "Greedy" -> {
-               val mutableList = list.toMutableList()
-               greedySortByVoteAverage(mutableList, 40.0)
-           }
-
-            else -> {
-                list
-            }
-
+            if (index != -1) listOf(sortedList[index]) else sortedList
         }
+
+        "QuickSort" -> {
+            val sortedList = list.toMutableStateList()
+            quickSort(sortedList, 0, sortedList.size - 1)
+            sortedList
+        }
+
+        "Greedy" -> {
+            val mutableList = list.toMutableList()
+            greedySortByVoteAverage(mutableList, 40.0)
+        }
+
+        else -> {
+            list
+        }
+
+    }
 
     LazyVerticalGrid(
         modifier = modifier,
