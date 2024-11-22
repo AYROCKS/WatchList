@@ -27,6 +27,17 @@
 
 ---
 
+<h2>💡 <strong>DSA Integration</strong>: </h2>
+
+<p>Showcase real-life applications of Data Structures and Algorithms (DSA) with:</p>
+<ul>
+    <li><strong>Binary Search</strong>: Searching for movies based on title.</li>
+    <li><strong>Quick Sort</strong>: Dynamically sorting movie lists based on user preference.</li>
+    <li><strong>Greedy Knapsack by Density</strong>: Optimizing movie selections based on multiple factors.</li>
+</ul>
+
+---
+
 <h2>📱 Screenshots</h2>
 <p align="center">
     <img src="https://github.com/AYROCKS/WatchList/blob/main/screenshots/homeScreen.jpg" alt="Home Screen" width="300" />
